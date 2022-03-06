@@ -1,4 +1,42 @@
 let game = {
+  lockMode: false,
+  firstCard: null,
+  secondCard: null,
+
+  setCard: function (id) {
+    let card = this.cards.filter((card) => card.id === id)[0];
+
+    if (card.flipped || this.lockMode) {
+      return false;
+    }
+
+    if (!this.firstCard) {
+      this.firstCard = card;
+      return true;
+    } else {
+      this.secondCard = card;
+      this.lockMode = true;
+      return true;
+    }
+  },
+
+  checkMatch: function () {
+    if (!this.firstCard || !this.secondCard) {
+      return false;
+    }
+    return this.firstCard.icon === this.secondCard.icon;
+  },
+
+  checkGameOver() {
+    return this.cards.filter((card) => !card.flipped).length == 0;
+  },
+
+  clearCard: function () {
+    this.firstCard = null;
+    this.secondCard = null;
+    this.lockMode = false;
+  },
+
   techs: [
     "bootstrap",
     "css",
