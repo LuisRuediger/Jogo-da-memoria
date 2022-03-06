@@ -12,7 +12,7 @@ function startGame() {
 function initializeCards(cards) {
   let gameBoard = document.getElementById("gameBoard");
 
-  cards.forEach((card) => {
+  game.cards.forEach((card) => {
     let cardElement = document.createElement("div");
     cardElement.id = card.id;
     cardElement.classList.add("card");
